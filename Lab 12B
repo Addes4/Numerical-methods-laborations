@@ -1,0 +1,25 @@
+% EJ FÄRDIG KOD
+
+f = @(x) 61*x - ((x.^2 + x + 0.03) ./ (3*x + 1)).^7 - 20*x.*exp(-x);  
+
+y = f(x);
+
+subplot(2,2,1)
+x = linspace(-0.5, 0.5, 1000);
+plot(x, y, 'b', 'LineWidth', 1.5);
+yline(0, 'k--');  %nollinje
+xlim([10^-14, 10^-12]);
+ylim([-0.1, 0.1]);
+
+subplot(2,2,2)
+plot(x, y, 'b', 'LineWidth', 1.5);
+yline(0, 'k--');  %nollinje
+xlim([min(x), max(x)]);
+ylim([-0.3, 0.3]);
+
+
+subplot(2,2,[3 4])
+plot(x, y, 'b', 'LineWidth', 1.5);
+yline(0, 'k--');  %nollinje
+xlim([min(x), max(x)]);
+ylim([-0.3, 0.3]);
