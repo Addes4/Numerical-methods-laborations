@@ -1,20 +1,20 @@
-% Definiera funktionen f(x) och dess derivata f'(x)
+% funktionen f(x) och dess derivata f'(x)
 f = @(x) 61*x - ((x.^2 + x + 0.03) ./ (3*x + 1)).^7 - 20*x.*exp(-x);
 df = @(x) 61 - 7 * ((x.^2 + x + 0.03).^(6) .* (2*x + 1)) ./ ((3*x + 1).^(7)) ...
-         - 20*exp(-x) + 20*x.*exp(-x);  % Derivata beräknad med kedjeregeln
+         - 20*exp(-x) + 20*x.*exp(-x);  % Derivata efter kedjeregel
 
 % Newtons metod
 tol = 1e-10; % Tolerans för konvergens
-max_iter = 100; % Max antal iterationer
+max_iter = 100; % max antal iterationer
 
-% Funktion för Newtons metod
+% Funktion för Newton
 newton = @(x0) newton_method(f, df, x0, tol, max_iter);
 
-% Hitta rötterna genom att välja bra startvärden
-x_min_root = newton(0.1); % Startvärde nära minsta roten
-x_max_root = newton(7);   % Startvärde nära största roten
+% startvärden
+x_min_root = newton(0.1); % minsta roten
+x_max_root = newton(7);   % största roten
 
-% Visa resultat
+% resultat
 fprintf('Minsta positiva roten: x = %.10f\n', x_min_root);
 fprintf('Största positiva roten: x = %.10f\n', x_max_root);
 
