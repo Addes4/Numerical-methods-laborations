@@ -1,5 +1,6 @@
-clc; clear; close all;
+% Laboration 1, uppgift 3
 
+% a)
 % Definiera funktionen f(x)
 f = @(x) 61*x - ((x.^2 + x + 0.03) ./ (3*x + 1)).^7 - 20*x.*exp(-x);
 
@@ -40,3 +41,6 @@ function root = secant_method(f, x0, x1, tol, max_iter)
     
     error('Sekantmetoden konvergerade inte!');
 end
+
+% b)
+% Rötterna blir 5.33*1e-13 och 6.4 vilket är samma som rötterna vi fick med Newton
