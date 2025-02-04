@@ -44,3 +44,15 @@ end
 
 % b)
 % Rötterna blir 5.33*1e-13 och 6.4 vilket är samma som rötterna vi fick med Newton
+
+% c)
+Sekantmetoden har superlinjär konvergens med konvergensordning ca p = 1.618 (gyllene snittet)
+
+lim n→∞ |e(n+1)|/|en|^p
+
+där en = |xn-x|
+
+alltså:
+nya felet/(gamla felet)^p
+
+% d)
