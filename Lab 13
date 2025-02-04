@@ -1,0 +1,42 @@
+clc; clear; close all;
+
+% Definiera funktionen f(x)
+f = @(x) 61*x - ((x.^2 + x + 0.03) ./ (3*x + 1)).^7 - 20*x.*exp(-x);
+
+% Tolerans och max iterationer
+tol = 1e-10;
+max_iter = 100;
+
+% Sekantmetod-funktion
+secant = @(x0, x1) secant_method(f, x0, x1, tol, max_iter);
+
+% Hitta rötterna med bra startvärden
+x_min_root_secant = secant(0.0001, 0.001);  % Startvärden nära minsta roten
+x_max_root_secant = secant(6, 8);           % Startvärden nära största roten
+
+% Visa resultat
+fprintf('Minsta positiva roten (sekantmetoden): x = %.10f\n', x_min_root_secant);
+fprintf('Största positiva roten (sekantmetoden): x = %.10f\n', x_max_root_secant);
+
+% Sekantmetoden implementerad som funktion
+function root = secant_method(f, x0, x1, tol, max_iter)
+    for i = 1:max_iter
+        f_x0 = f(x0);
+        f_x1 = f(x1);
+        
+        % Beräkna nästa x med sekantformeln
+        x_new = x1 - f_x1 * (x1 - x0) / (f_x1 - f_x0);
+        
+        % Kontrollera konvergens
+        if abs(x_new - x1) < tol
+            root = x_new;
+            return;
+        end
+        
+        % Uppdatera värden
+        x0 = x1;
+        x1 = x_new;
+    end
+    
+    error('Sekantmetoden konvergerade inte!');
+end
