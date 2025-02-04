@@ -1,4 +1,4 @@
-%Lab 1, uppgift 2b
+% Lab 1, uppgift 2b
 
 % def funktionen f(x)
 f = @(x) 61*x - ((x.^2 + x + 0.03) ./ (3*x + 1)).^7 - 20*x.*exp(-x);
