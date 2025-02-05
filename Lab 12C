@@ -33,3 +33,27 @@ function root = newton_method(f, df, x0, tol, max_iter)
     end
     error('Newtons metod konvergerade inte!');
 end
+
+
+% Lab 1, uppgift 2e
+
+
+% def f(x)
+f = @(x) 61*x - ((x.^2 + x + 0.03) ./ (3*x + 1)).^7 - 20*x.*exp(-x);
+
+% derivatan f'(x)
+df = @(x) 61 - 20*exp(-x) + ...
+(-7 * ((x.^2 + x + 0.03) ./ (3*x + 1)).^6) .* ...
+((2*x + 1) .* (3*x + 1) - (x.^2 + x + 0.03) .* 3) ./ (3*x + 1).^2;
+
+% Andra derivatan f''(x)
+d2f = @(x) (df(x + 1e-5) - df(x - 1e-5)) / (2e-5);
+
+% Största roten från Newtons metod
+x_star = 6.396;
+
+% konvergenskonstanten C
+C = abs(d2f(x_star)) / (2 * abs(df(x_star)));
+
+% resultatet
+fprintf('Konvergenskonstanten vid x* = %.6f är C = %.6e\n', x_star, C);
