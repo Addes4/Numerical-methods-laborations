@@ -43,7 +43,7 @@ title('Största positiva roten');
 grid on;
 
 
-
+%%
 
 
 % Lab 1, uppgift 2c
@@ -83,6 +83,7 @@ function root = newton_method(f, df, x0, tol, max_iter)
 end
 
 
+%%
 
 
 % Lab 1, uppgift 2e
