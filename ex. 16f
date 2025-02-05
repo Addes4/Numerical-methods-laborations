@@ -1,0 +1,27 @@
+% Definiera integranden
+f = @(x) (1 - exp(-(x/5).^3)) ./ (5*x.^3);
+
+% Definiera integrationsgränser
+x_transition = 1e-4;
+B = 1000;
+
+% Definiera antal steg för trapetsregeln
+N_coarse = 1000; % Grov uppdelning
+N_fine = 2000;   % Finare uppdelning (dubbelt antal punkter)
+
+% Beräkna trapetsregeln med grov uppdelning
+x_coarse = linspace(x_transition, B, N_coarse+1);
+y_coarse = f(x_coarse);
+I_coarse = (B - x_transition) / N_coarse * (sum(y_coarse) - (y_coarse(1) + y_coarse(end)) / 2);
+
+% Beräkna trapetsregeln med finare uppdelning
+x_fine = linspace(x_transition, B, N_fine+1);
+y_fine = f(x_fine);
+I_fine = (B - x_transition) / N_fine * (sum(y_fine) - (y_fine(1) + y_fine(end)) / 2);
+
+% Feluppskattning med Richardson-extrapolation
+error_estimate = abs(I_fine - I_coarse) / 3;
+
+fprintf('Integral med trapetsregeln (N=%d): %.10f\n', N_coarse, I_coarse);
+fprintf('Integral med finare trapetsregel (N=%d): %.10f\n', N_fine, I_fine);
+fprintf('Feluppskattning med Richardson-extrapolation: %.2e\n', error_estimate);
