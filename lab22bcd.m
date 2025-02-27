@@ -84,3 +84,21 @@ end
 
 disp(['72% L = ', num2str(L1, '%.4f')]);
 disp([' vol = ', num2str(volym_lur(L1, N0), '%.4f')]);
+
+%  kontukurva 40 punkter.
+N_plot = 40;
+[x_plot, y_plot] = rk4(@f_ode, 0, 2.5, L1/N_plot, L1);
+
+%gör kolumnvektorer
+x_plot = x_plot(:);
+f_plot = y_plot(:);
+
+%  fi 
+fi = 0:2*pi/30:2*pi;
+
+X = x_plot * ones(1, length(fi));
+Y = f_plot * cos(fi);
+Z = f_plot * sin(fi);
+
+figure;
+surf(X, Y, Z);
