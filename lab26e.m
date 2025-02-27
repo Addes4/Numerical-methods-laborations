@@ -1,9 +1,9 @@
 clear; clc; close all;
 
-function [u, iter] = gaussNewton(u0, tol, maxIter, data)
+function [u, iter] = gaussNewton(u0, tol, maxiter, data)
     u = u0;
-    for iter = 1:maxIter
-        r = residuals(u, data);  % ber res
+    for iter = 1:maxiter
+        r = residualer(u, data);  % ber res
         J = jac_res(u, data); % ber jac
         delta = - (J' * J) \ (J' * r);
         u = u + delta;
@@ -13,7 +13,7 @@ function [u, iter] = gaussNewton(u0, tol, maxIter, data)
     end
 end
 
-function r = residuals(u, data)
+function r = residualer(u, data)
     X = u(1); Y = u(2); R = u(3);
     n = size(data, 1);
     r = zeros(n, 1);
