@@ -5,7 +5,7 @@ function dydx = f_ode(x, y)
 end
 
 
-function [x, y] = rungeKutta4(f, x0, y0, h, L)
+function [x, y] = rk4(f, x0, y0, h, L)
     %vektor för xvärden
     x = x0:h:L;
     N = length(x);
@@ -23,7 +23,7 @@ function [x, y] = rungeKutta4(f, x0, y0, h, L)
 end
 
 
-function I = trapezoidal_rule(x, f_vals)
+function I = trapregel(x, f_vals)
     I = 0;
     N = length(x);
     for i = 1:N-1
@@ -35,22 +35,21 @@ L = 4.00;
 x0 = 0;
 y0 = 2.5;
 
-% steglängder richardson
+% steglängder richardsson
 h1 = 0.01;
 h2 = 0.005;
 
 %RK4
-[x1, y1] = rungeKutta4(@f_ode, x0, y0, h1, L);
-[x2, y2] = rungeKutta4(@f_ode, x0, y0, h2, L);
+[x1, y1] = rk4(@f_ode, x0, y0, h1, L);
+[x2, y2] = rk4(@f_ode, x0, y0, h2, L);
 
 %vollymen
-V1 = pi * trapezoidal_rule(x1, y1.^2);
-V2 = pi * trapezoidal_rule(x2, y2.^2);
+V1 = pi * trapregel(x1, y1.^2);
+V2 = pi * trapregel(x2, y2.^2);
 
 % richard
 V_extrap = V2 + (V2 - V1)/3;
-felgrans = abs(V_extrap - V2);
+fel = abs(V_extrap - V2);
 
-%visa
-disp(['volym ', num2str(V_extrap)]);
-disp(['Uppskattad felgräns ', num2str(felgrans)]);
+disp(['volym = ', num2str(V_extrap)]);
+disp([' felgräns = ', num2str(fel)]);
