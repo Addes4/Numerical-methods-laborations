@@ -33,7 +33,7 @@ while abs(L1 - L0) > tol && iter < maxIter
     iter = iter + 1;
 end
 
-function [V_extrap, felgrans] = volym_lur(L, N)
+function [V_extrap, fel] = volym_lur(L, N)
 
     x0 = 0;
     y0 = 2.5;
@@ -52,7 +52,7 @@ function [V_extrap, felgrans] = volym_lur(L, N)
     % richard
     V_extrap = V2 + (V2 - V1) / 3;
     
-    felgrans = abs(V_extrap - V2);
+    fel = abs(V_extrap - V2);
 end
 
 % rk4
@@ -74,11 +74,10 @@ function [x, y] = rk4(f, x0, y0, h, L)
     end
 end
 
-function I = trapregel(x, f_vals)
-% diff närliggande xvärden
-dx = diff(x);
+function I = trapregel(x, f_var) % f värde
+dx = diff(x); % diff närliggande xvärden
 %medel av närliggande fvärden
-avg_f = (f_vals(1:end-1) + f_vals(2:end)) / 2;
+avg_f = (f_var(1:end-1) + f_var(2:end)) / 2;
 % tot
 I = sum(dx .* avg_f);
 end
