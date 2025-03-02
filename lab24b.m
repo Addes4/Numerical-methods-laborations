@@ -5,19 +5,20 @@ L = 3.60;
 T0 = 310;
 TL = 450;
 
-%n1 = 72 --> h1 = 0.05 så x blir exakt nod
-n1 = 72;
+%små steglängder för nogranhet
+n1 = 576;
 h1 = L/n1;
-x1 = linspace(0, L, n1+1)';  % kol.vekt. m n1+1 noder
+x1 = linspace(0, L, n1+1)';  % kolumnvektor med n1+1 noder
+index1 = round(1.65/h1) + 1; %index för x = 1.65
 T_1 = rvp(L, T0, TL, x1, h1);
-T_1_165 = T_1(34);
+T_1_165 = T_1(index1);
 
-%n2 = 144 --> h2 = 0.025
-n2 = 144;
+n2 = 1152;
 h2 = L/n2;
 x2 = linspace(0, L, n2+1)';
+index2 = round(1.65/h2) + 1;
 T_2 = rvp(L, T0, TL, x2, h2);
-T_2_165 = T_2(67);
+T_2_165 = T_2(index2);
 
 % richard
 T_extrap = T_2_165 + (T_2_165 - T_1_165)/3;
@@ -65,9 +66,9 @@ end
 
 disp([' n1 = ', num2str(T_1_165, '%.4f')]);
 disp(['n2 = ', num2str(T_2_165, '%.4f')]);
-disp(['Richard.extr.  = ', num2str(T_extrap, '%.4f')]);
+disp(['richard.extr.  = ', num2str(T_extrap, '%.4f')]);
 disp([' fel: ', num2str(err_est, '%.4e')]);
 
 figure;
-plot(x2, T_2, 'b-o','LineWidth',1.5);
+plot(x2, T_2, 'b-o');
 grid on;
