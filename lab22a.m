@@ -4,7 +4,6 @@ function dydx = f_ode(x, y)
     dydx = - (1/6 + (pi * sin(pi * x))/(1.6 - cos(pi * x))) * y;
 end
 
-
 function [x, y] = rk4(f, x0, y0, h, L)
     %vektor för xvärden
     x = x0:h:L;
