@@ -13,7 +13,6 @@ function [u, iter] = newtonsmet(u0, tol, max_iter)
     end
 end
 
-
 function F_varde = F(u)
     X = u(1);
     Y = u(2);
