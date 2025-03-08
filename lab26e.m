@@ -28,7 +28,6 @@ function r = residualer(u, data)
     end
 end
 
-
 function J = jac_res(u, data)
     X = u(1); Y = u(2); R = u(3);
     n = size(data, 1);
